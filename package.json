@@ -5,7 +5,7 @@
   "author": "Taylor Beseda aka. tbeseda",
   "publisher": "tbeseda",
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "repository": "https://github.com/tbeseda/vscode-toggle-js-inlayhints",
   "engines": {
     "vscode": "^1.72.0"
