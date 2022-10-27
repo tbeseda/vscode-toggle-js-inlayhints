@@ -2,7 +2,10 @@
   "name": "toggle-js-inlayhints",
   "displayName": "Toggle JS & TS InlayHints",
   "description": "Quickly toggle all JavaScript and TypeScript inlay hints",
-  "author": "Taylor Beseda aka. tbeseda",
+  "author": {
+    "name": "Taylor Beseda",
+    "url": "https://tbeseda.com"
+  },
   "publisher": "tbeseda",
   "license": "MIT",
   "version": "0.1.0",
@@ -12,6 +15,9 @@
     "url": "https://github.com/tbeseda/vscode-toggle-js-inlayhints/issues"
   },
   "main": "./index.js",
+  "scripts": {
+    "publish": "vsce publish minor --githubBranch main"
+  },
   "engines": {
     "vscode": "^1.72.0"
   },
@@ -27,6 +33,7 @@
       }
     ]
   },
+  "icon": "images/icon.png",
   "keywords": [
     "vscode",
     "extension",
