@@ -1,38 +1,32 @@
 {
   "name": "toggle-js-inlayhints",
-  "displayName": "Toggle JS InlayHints",
-  "description": "Quickly turn on or off all JavaScript inlay hints",
+  "displayName": "Toggle JS & TS InlayHints",
+  "description": "Quickly toggle all JavaScript and TypeScript inlay hints",
   "author": "Taylor Beseda aka. tbeseda",
   "publisher": "tbeseda",
   "license": "MIT",
   "version": "0.1.0",
+  "homepage": "https://github.com/tbeseda/vscode-toggle-js-inlayhints#readme",
   "repository": "https://github.com/tbeseda/vscode-toggle-js-inlayhints",
+  "bugs": {
+    "url": "https://github.com/tbeseda/vscode-toggle-js-inlayhints/issues"
+  },
+  "main": "./index.js",
   "engines": {
     "vscode": "^1.72.0"
   },
   "activationEvents": [
-    "onCommand:extension.toggleJsInlayhintsOff",
-    "onCommand:extension.toggleJsInlayhintsOn"
+    "onCommand:extension.toggleInlayhints"
   ],
-  "main": "./index.js",
   "contributes": {
     "commands": [
       {
-        "command": "extension.toggleJsInlayhintsOff",
-        "title": "JS Inlay Hints: Off",
-        "shortTitle": "Hints off"
-      },
-      {
-        "command": "extension.toggleJsInlayhintsOn",
-        "title": "JS Inlay Hints: On",
-        "shortTitle": "Hints on"
+        "command": "extension.toggleInlayhints",
+        "title": "Toggle Inlay Hints",
+        "shortTitle": "Toggle hints"
       }
     ]
   },
-  "bugs": {
-    "url": "https://github.com/tbeseda/vscode-toggle-js-inlayhints/issues"
-  },
-  "homepage": "https://github.com/tbeseda/vscode-toggle-js-inlayhints#readme",
   "keywords": [
     "vscode",
     "extension",

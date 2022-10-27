@@ -1,7 +1,9 @@
 const vscode = require("vscode");
 
-const SETTINGS_PREFIX = "javascript.inlayHints";
-const ALL_SETTINGS = {
+const GLOBAL = true;
+const JS_PREFIX = "javascript.inlayHints";
+const TS_PREFIX = "typescript.inlayHints";
+const ENABLED_SETTINGS = {
 	"enumMemberValues.enabled": true,
 	"functionLikeReturnTypes.enabled": true,
 	"parameterNames.enabled": "all",
@@ -9,32 +11,47 @@ const ALL_SETTINGS = {
 	"propertyDeclarationTypes.enabled": true,
 	"variableTypes.enabled": true,
 };
-const SETTING_KEYS = Object.keys(ALL_SETTINGS);
+const SETTING_KEYS = Object.keys(ENABLED_SETTINGS);
 
 module.exports = {
 	activate(context) {
-		const commandOff = vscode.commands.registerCommand(
-			"extension.toggleJsInlayhintsOff",
+		const toggleCommand = vscode.commands.registerCommand(
+			"extension.toggleInlayhints",
 			() => {
-				const settings = vscode.workspace.getConfiguration(SETTINGS_PREFIX);
+				const jsSettings = vscode.workspace.getConfiguration(JS_PREFIX);
+				const tsSettings = vscode.workspace.getConfiguration(TS_PREFIX);
 
-				for (const settingKey of SETTING_KEYS) {
-					settings.update(settingKey, undefined, true);
+				const hasEnabled = SETTING_KEYS.some((settingKey) => {
+					return (
+						jsSettings.get(settingKey) !==
+							jsSettings.inspect(settingKey)?.defaultValue ||
+						tsSettings.get(settingKey) !==
+							tsSettings.inspect(settingKey)?.defaultValue
+					);
+				});
+
+				if (hasEnabled) {
+					for (const settingKey of SETTING_KEYS) {
+						jsSettings.update(settingKey, undefined, GLOBAL);
+						tsSettings.update(settingKey, undefined, GLOBAL);
+					}
+				} else {
+					for (const settingKey of SETTING_KEYS) {
+						jsSettings.update(settingKey, ENABLED_SETTINGS[settingKey], GLOBAL);
+						tsSettings.update(settingKey, ENABLED_SETTINGS[settingKey], GLOBAL);
+					}
 				}
+
+				vscode.window.setStatusBarMessage(
+					[
+						`$(eye${hasEnabled ? "-closed" : ""})`,
+						`Inlay hints ${hasEnabled ? "off" : "on"}`,
+					].join(" "),
+					3000,
+				);
 			},
 		);
 
-		const commandOn = vscode.commands.registerCommand(
-			"extension.toggleJsInlayhintsOn",
-			() => {
-				const settings = vscode.workspace.getConfiguration(SETTINGS_PREFIX);
-
-				for (const settingKey of SETTING_KEYS) {
-					settings.update(settingKey, ALL_SETTINGS[settingKey], true);
-				}
-			},
-		);
-
-		context.subscriptions.push(commandOff, commandOn);
+		context.subscriptions.push(toggleCommand);
 	},
 };
