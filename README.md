@@ -4,7 +4,7 @@
 
 Add two VS Code commands to turn on and off all JavaScript inlay hint settings.
 
-![screen recording](./images/vscode-toggle-js-inlayhints.gif)
+![screen recording](./vscode-toggle-inlayhints.gif)
 
 When toggled **ON**, the following is set for both `javascript.inlayHints` and `typescript.inlayHints` in a user's settings JSON:
 
